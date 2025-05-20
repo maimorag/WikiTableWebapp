@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Wikipedia Table Grouper</title>
+  </head>
+  <body>
+    <h1>Wikipedia Table Grouper</h1>
+    <form method="POST">
+      <label for="page">Wikipedia List Page:</label>
+      <input
+        type="text"
+        name="page"
+        placeholder="List_of_animal_names"
+        required
+      />
+      <br />
+      <label for="column">Group by Column Name:</label>
+      <input
+        type="text"
+        name="column"
+        placeholder="Collateral adjective"
+        required
+      />
+      <br /><br />
+      <input type="submit" value="Group" />
+    </form>
+    {% if grouped_data %}
+    <h2>Grouped Results:</h2>
+    {% for key, values in grouped_data.items() %}
+    <h3>{{ key }}</h3>
+    <ul>
+      {% for name, img in values %}
+      <li>
+        {{ name }}<br />
+        {% if img %}
+        <img src="{{ img }}" alt="{{ name }}" width="120" />
+        {% else %} No image available {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+    {% endfor %} {% endif %}
+  </body>
+</html>
